@@ -35,10 +35,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="QUIKSharp">
       <HintPath>..\..\..\Port\QUIKSharpPortN07\QUIKSharp-master\Examples\RobotDemo\bin\Debug\QUIKSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -68,6 +75,15 @@
     </Compile>
     <Compile Include="Commands\Base\Command.cs" />
     <Compile Include="Commands\CloseApplicationCommand.cs" />
+    <Compile Include="Commands\LamdaCommand.cs" />
+    <Compile Include="QuikBase\QuikArtemDB.cs" />
+    <Compile Include="QuikBase\Tables\ClassAllTrade.cs" />
+    <Compile Include="QuikBase\Tables\ClassDepoLimitEx.cs" />
+    <Compile Include="QuikBase\Tables\ClassMoneyLimitEx.cs" />
+    <Compile Include="QuikBase\Tables\ClassOrder.cs" />
+    <Compile Include="QuikBase\Tables\ClassParam.cs" />
+    <Compile Include="QuikBase\Tables\ClassQuote.cs" />
+    <Compile Include="QuikBase\Tool.cs" />
     <Compile Include="ViewModels\Base\ViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="Views\Windows\MainWindow.xaml.cs">
@@ -93,6 +109,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -103,7 +120,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
-    <Folder Include="QuikBase\Tables\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

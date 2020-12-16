@@ -1,11 +1,14 @@
-﻿using A011MainPavel001PortN07.ViewModels.Base;
+﻿using A011MainPavel001PortN07.Commands;
+using A011MainPavel001PortN07.ViewModels.Base;
 using Microsoft.Win32;
+using QuikSharp.DataStructures;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace A011MainPavel001PortN07.ViewModels
@@ -72,7 +75,7 @@ namespace A011MainPavel001PortN07.ViewModels
 
         #region CLoseApplicationCommand
 
-        public ICommand CloseApplicationCommand { get; }
+        public ICommand CloseApplicationCommand2 { get; }
 
         private bool CanCloseApplicationCommandExecute(object p) => true;
 
@@ -84,64 +87,64 @@ namespace A011MainPavel001PortN07.ViewModels
         #endregion
 
         #region ChangeTabIndexCommand           
-        public ICommand ChangeTabIndexCommand { get; }
-        public ObservableCollection<Group> Groups { get; }
-        public object[] CompositeCollection { get; }
+        //public ICommand ChangeTabIndexCommand { get; }
+        //public ObservableCollection<Group> Groups { get; }
+        //public object[] CompositeCollection { get; }
 
-        private bool CanChangeTabIndexCommandExecute(object p) => _SelectedPageIndex >= 0;
+        //private bool CanChangeTabIndexCommandExecute(object p) => _SelectedPageIndex >= 0;
 
-        private void OnChangeTabIndexCommandExecuted(object p)
-        {
-            //if (!(p is int count)) return;
-            //SelectedPageIndex += count;
+        //private void OnChangeTabIndexCommandExecuted(object p)
+        //{
+        //    //if (!(p is int count)) return;
+        //    //SelectedPageIndex += count;
 
-            // или 
-            if ((p is null)) return;
-            {
-                SelectedPageIndex += Convert.ToInt32(p);
-            }
-        }
+        //    // или 
+        //    if ((p is null)) return;
+        //    {
+        //        SelectedPageIndex += Convert.ToInt32(p);
+        //    }
+        //}
 
         #endregion
 
         #region CreateGroupCommand
-        public ICommand CreateGroupCommand { get; }
+        //public ICommand CreateGroupCommand { get; }
 
-        private bool CanCreateGroupCommandExecute(object p) => true;
+        //private bool CanCreateGroupCommandExecute(object p) => true;
 
-        private void OnCreateGroupCommandExecuted(object p)
-        {
-            var group_max_index = Groups.Count + 1;
+        //private void OnCreateGroupCommandExecuted(object p)
+        //{
+        //    var group_max_index = Groups.Count + 1;
 
-            var new_group = new Group
-            {
-                Name = $"Группа {group_max_index}",
-                Students = new ObservableCollection<Student>()
+        //    var new_group = new Group
+        //    {
+        //        Name = $"Группа {group_max_index}",
+        //        Students = new ObservableCollection<Student>()
 
-            };
+        //    };
 
-            Groups.Add(new_group);
+        //    Groups.Add(new_group);
 
-        }
+        //}
 
         #endregion
 
         #region DeleteGroupCommand
 
-        public ICommand DeleteGroupCommand { get; }
+        //public ICommand DeleteGroupCommand { get; }
 
-        private bool CanDeleteGroupCommandExecute(object p) => p is Group group && Groups.Contains(group);
+        //private bool CanDeleteGroupCommandExecute(object p) => p is Group group && Groups.Contains(group);
 
-        private void OnDeleteGroupCommandExecuted(object p)
-        {
-            if (!(p is Group group)) return;
+        //private void OnDeleteGroupCommandExecuted(object p)
+        //{
+        //    if (!(p is Group group)) return;
 
-            var group_index = Groups.IndexOf(group);
+        //    var group_index = Groups.IndexOf(group);
 
-            Groups.Remove(group);
-            if (group_index < Groups.Count)
-                SelectedGroup = Groups[group_index];
-        }
+        //    Groups.Remove(group);
+        //    if (group_index < Groups.Count)
+        //        SelectedGroup = Groups[group_index];
+        //}
 
         #endregion
 
@@ -222,13 +225,13 @@ namespace A011MainPavel001PortN07.ViewModels
 
             #region Команды
 
-            CloseApplicationCommand = new LamdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
+            CloseApplicationCommand2 = new LamdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
 
-            ChangeTabIndexCommand = new LamdaCommand(OnChangeTabIndexCommandExecuted, CanChangeTabIndexCommandExecute);
+            //ChangeTabIndexCommand = new LamdaCommand(OnChangeTabIndexCommandExecuted, CanChangeTabIndexCommandExecute);
 
-            CreateGroupCommand = new LamdaCommand(OnCreateGroupCommandExecuted, CanCreateGroupCommandExecute);
+            //CreateGroupCommand = new LamdaCommand(OnCreateGroupCommandExecuted, CanCreateGroupCommandExecute);
 
-            DeleteGroupCommand = new LamdaCommand(OnDeleteGroupCommandExecuted, CanDeleteGroupCommandExecute);
+            //DeleteGroupCommand = new LamdaCommand(OnDeleteGroupCommandExecuted, CanDeleteGroupCommandExecute);
 
             //AllTradeCommand = new LamdaCommand(OnAllTradeCommandExecuted, CanAllTradeCommandExecute);
 
