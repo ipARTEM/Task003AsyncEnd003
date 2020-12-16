@@ -19,6 +19,15 @@ namespace A011MainPavel001PortN07.QuikBase
         public virtual DbSet<ClassAllTrade> ClassAllTrades { get; set; }
 
         public virtual DbSet<ClassParam> ClassParams { get; set; }
+
         public virtual DbSet<ClassQuote> ClassQuotes { get; set; }
+
+        public virtual DbSet<ClassMoneyLimitEx> ClassMoneyLimitExs { get; set; }
+
+        public virtual DbSet<ClassDepoLimitEx> ClassDepoLimitExs { get; set; }
+
+        public virtual DbSet<ClassOrder> ClassOrders { get; set; }
+
+
     }
 }
