@@ -1,7 +1,7 @@
-﻿using A011MainPavel001PortN07.Commands;
-using A011MainPavel001PortN07.Models;
-using A011MainPavel001PortN07.QuikBase;
-using A011MainPavel001PortN07.ViewModels.Base;
+﻿using A011MainPavel002PortN07.Commands;
+using A011MainPavel002PortN07.Models;
+using A011MainPavel002PortN07.QuikBase;
+using A011MainPavel002PortN07.ViewModels.Base;
 using Microsoft.Win32;
 using QuikSharp;
 using QuikSharp.DataStructures;
@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
-namespace A011MainPavel001PortN07.ViewModels
+namespace A011MainPavel002PortN07.ViewModels
 {
     public class MainWindowViewModel : ViewModel
     {
@@ -24,7 +24,7 @@ namespace A011MainPavel001PortN07.ViewModels
         #region Quik
 
         private Quik _quik;
-        string secCode;
+        string secCode = "SBER";
         string classCode = "";
         string clientCode;
         private Tool tool;
@@ -199,12 +199,13 @@ namespace A011MainPavel001PortN07.ViewModels
 
 
         #endregion
-
+        #endregion
         /************************************************************************************************************/
         public MainWindowViewModel()
         {
             db = new QuikArtemDB();     // инициализация контекста
 
+            collLog = new ObservableCollection<Loger>();
 
             SaveFileDialog dialog = new SaveFileDialog();
             var file_name = dialog.FileName;
@@ -269,7 +270,7 @@ namespace A011MainPavel001PortN07.ViewModels
             db.ClassDepoLimitExs.Add(eventDepo);
             db.SaveChanges();
 
- 
+
         }
 
         private void Events_OnParam(Param par)
@@ -396,7 +397,7 @@ namespace A011MainPavel001PortN07.ViewModels
                 db.ClassParams.Add(eventParam);
                 db.SaveChanges();
 
-        
+
 
             }
 
@@ -517,7 +518,7 @@ namespace A011MainPavel001PortN07.ViewModels
                     db.SaveChanges();
                 }
 
-       
+
             }
         }
 
@@ -580,7 +581,7 @@ namespace A011MainPavel001PortN07.ViewModels
 
 
                         Log("Подключение eventoff пройдено.");
-                  
+
                     }
                 }
             }
@@ -588,17 +589,18 @@ namespace A011MainPavel001PortN07.ViewModels
             {
                 Log("Ошибка получения данных по инструменту.");
 
+                //Sleep(30);
             }
         }
 
-        private void Sleep()
+        private void Sleep(int sl)
         {
-            Thread.Sleep(5000);
+            Thread.Sleep(sl);
         }
 
         public async void AllQuikConnect()  //Подключение к Quik
         {
-           
+
             try
             {
                 Log("Подключаемся к терминалу Quik...");
@@ -629,7 +631,7 @@ namespace A011MainPavel001PortN07.ViewModels
 
                         Log("Соединение с сервером установлено.");
 
-                     
+
 
 
                     }
@@ -756,21 +758,26 @@ namespace A011MainPavel001PortN07.ViewModels
             Log(allPosetions.ToString());
         }
 
-        private string stringLog;
 
-        ObservableCollection<String> logers;
+        Loger log = new Loger();
+
+        private ObservableCollection<Loger> collLog ;
+
+        public ObservableCollection<Loger> CollLog
+        {
+            get => collLog;
+            set => Set(ref collLog, value);
+        }
 
         private void Log(string str)
         {
             try
             {
-                logers = new ObservableCollection<String>();
+                
 
+                log.LogString=(DateTime.Now.ToString("yyyy.MM.dd  HH:mm:ss.ffff") + " " + str + Environment.NewLine);
 
-                logers.Add("fgd");
-
-                   // logers.Add(DateTime.Now.ToString("yyyy.MM.dd  HH:mm:ss.ffff") + " " + str + Environment.NewLine);
-
+                collLog.Add(log);
 
 
                     //TBLog.ScrollToLine(TBLog.LineCount - 1);
@@ -782,6 +789,6 @@ namespace A011MainPavel001PortN07.ViewModels
             }
         }
         #endregion
-        #endregion
+       
     }
 }

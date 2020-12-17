@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace A011MainPavel001PortN07.Models
+namespace A011MainPavel002PortN07.Models
 {
     public class Loger
     {

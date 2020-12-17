@@ -1,13 +1,13 @@
-﻿<Window x:Class="A011MainPavel001PortN07.Views.Windows.MainWindow"
+﻿<Window x:Class="A011MainPavel002PortN07.Views.Windows.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" mc:Ignorable="d"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:A011MainPavel001PortN07"
+        xmlns:local="clr-namespace:A011MainPavel002PortN07"
         
-        xmlns:vm="clr-namespace:A011MainPavel001PortN07.ViewModels"
+        xmlns:vm="clr-namespace:A011MainPavel002PortN07.ViewModels"
         
-        Title="{}" Height="1000" Width="1400" WindowStartupLocation="CenterScreen">
+        Title="{Binding Title}" Height="1000" Width="1400" WindowStartupLocation="CenterScreen">
 
     <Window.DataContext>
         <vm:MainWindowViewModel/>
@@ -210,7 +210,7 @@
 
                             <Grid Grid.Row="4" Grid.Column="1" >
 
-                                <TextBox x:Name="TBLog"/>
+                                <ListBox ItemsSource="{Binding  CollLog}" DisplayMemberPath="LogString" />
 
                             </Grid>
 
@@ -468,8 +468,7 @@
 
                     <StackPanel Orientation="Horizontal" >
                         <Label Content="Текущее время:" Width="100" HorizontalContentAlignment="Right"/>
-                        <Label Content="{Binding CurrentTime}" ContentStringFormat="G" />
-                        <Label Content="{Binding Time1}" ContentStringFormat="G" />
+                     
 
                     </StackPanel>
                 </StackPanel>
