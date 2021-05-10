@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace A011MainPavel002PortN07
+namespace Task003AsyncEnd003
 {
     /// <summary>
     /// Логика взаимодействия для App.xaml

@@ -1,11 +1,13 @@
-﻿<Window x:Class="A011MainPavel002PortN07.Views.Windows.MainWindow"
+﻿<Window x:Class="Task003AsyncEnd003.Views.Windows.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" mc:Ignorable="d"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:A011MainPavel002PortN07"
+        xmlns:local="clr-namespace:Task003AsyncEnd003"
         
-        xmlns:vm="clr-namespace:A011MainPavel002PortN07.ViewModels"
+        
+        xmlns:cmd="clr-namespace:Task003AsyncEnd003.Commands"
+        xmlns:vm="clr-namespace:Task003AsyncEnd003.ViewModels"
         
         Title="{Binding Title}" Height="1000" Width="1400" WindowStartupLocation="CenterScreen">
 
@@ -24,6 +26,11 @@
                 <MenuItem Command="ApplicationCommands.Paste"/>
                 <Separator />
                 <MenuItem Header="Выход" Command="{Binding  CloseApplicationCommand2}"  />
+                <MenuItem Header="Выход 2">
+                    <MenuItem.Command>
+                        <cmd:CloseApplicationCommand/>
+                    </MenuItem.Command>
+                </MenuItem>
             </MenuItem>
             <MenuItem Header="_Окна">
                 <MenuItem Header="Системная данные"/>
@@ -110,7 +117,7 @@
                                 <StackPanel>
                                     <Button  x:Name="AllQuik" Content="Включить AllQuik" Margin="10"  Command="{Binding QuikAllConnectCommand}" />
                                     <Label Content="Инструмент:" Margin="10 10 0 0" />
-                                    <TextBox x:Name="TBInstr"  Margin="10 0 10 0"/>
+                                    <TextBox x:Name="TBInstr"   Margin="10 0 10 0"/>
 
 
                                 </StackPanel>
@@ -118,7 +125,7 @@
 
                             <Grid Grid.Row="1" Grid.Column="0" >
                                 <StackPanel>
-                                    <Button x:Name="BKillAllOrder" Content="Закрыть все заявки" Margin="10"/>
+                                    <Button x:Name="BKillAllOrder" Content="Закрыть все заявки" Margin="10" />
                                     <Button x:Name="BKillAllPosetions" Content="Закрыть все позиции" Margin="10"/>
 
 
@@ -149,7 +156,7 @@
                             <Grid Grid.Row="0" Grid.Column="1" Grid.RowSpan="3"   >
                                 <StackPanel>
                                     <Label Content="Прямо из Quik:Event OnAllTrade:"/>
-                                    <DataGrid  MaxHeight="100"/>
+                                    <DataGrid ItemsSource="{Binding db.ClassAllTrades}"  MaxHeight="100"/>
 
                                     <Label Content="Прямо из Quik:Event OnParam:"/>
                                     <DataGrid MaxHeight="100"/>
@@ -210,15 +217,26 @@
 
                             <Grid Grid.Row="4" Grid.Column="1" >
 
-                                <ListBox ItemsSource="{Binding  CollLog}" DisplayMemberPath="LogString" />
+
+                                <ListBox  Grid.Row="1" ItemsSource="{Binding Logs, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"  />
 
                             </Grid>
-
                         </Grid>
+
                     </TabItem>
 
                     <TabItem Header="Логирование">
-                        <TextBox   />
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+
+                            <Button Grid.Row="0" Content="Подключение" HorizontalAlignment="Left" VerticalAlignment="Top" Command="{Binding QuikAllConnectCommand}"/>
+                            <ListBox  Grid.Row="1" ItemsSource="{Binding Logs, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"  />
+
+
+                        </Grid>
                     </TabItem>
 
                     <TabItem Header="Новая заявка">

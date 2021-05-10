@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace A011MainPavel002PortN07.Properties {
+namespace Task003AsyncEnd003.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

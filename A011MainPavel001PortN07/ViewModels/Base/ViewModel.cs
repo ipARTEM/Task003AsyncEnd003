@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace A011MainPavel002PortN07.ViewModels.Base
+namespace Task003AsyncEnd003.ViewModels.Base
 {
     public abstract class ViewModel : INotifyPropertyChanged, IDisposable
     {

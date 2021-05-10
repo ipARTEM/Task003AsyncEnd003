@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace A011MainPavel002PortN07.Commands.Base
+namespace Task003AsyncEnd003.Commands.Base
 {
     public abstract class Command : ICommand
     {

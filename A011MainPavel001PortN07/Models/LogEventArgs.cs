@@ -6,9 +6,13 @@ using System.Threading.Tasks;
 
 namespace Task003AsyncEnd003.Models
 {
-    public class Loger
+    public class LogEventArgs : EventArgs
     {
-        public string LogString { get; set; }
+        public readonly string msg;
 
+        public LogEventArgs(string message)
+        {
+            msg = message;
+        }
     }
 }

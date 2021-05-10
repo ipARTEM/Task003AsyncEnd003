@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace A011MainPavel002PortN07
+namespace Task003AsyncEnd003
 {
     public class ClassAllTrade
     {

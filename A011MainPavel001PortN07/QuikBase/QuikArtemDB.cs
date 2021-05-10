@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace A011MainPavel002PortN07.QuikBase
+namespace Task003AsyncEnd003.QuikBase
 {
     public class QuikArtemDB :DbContext
     {

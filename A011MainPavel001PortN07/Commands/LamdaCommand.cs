@@ -1,11 +1,11 @@
-﻿using A011MainPavel002PortN07.Commands.Base;
+﻿using Task003AsyncEnd003.Commands.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace A011MainPavel002PortN07.Commands
+namespace Task003AsyncEnd003.Commands
 {
     public class LamdaCommand : Command
     {

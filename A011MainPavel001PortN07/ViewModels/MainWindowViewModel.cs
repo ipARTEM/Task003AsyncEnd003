@@ -1,7 +1,7 @@
-﻿using A011MainPavel002PortN07.Commands;
-using A011MainPavel002PortN07.Models;
-using A011MainPavel002PortN07.QuikBase;
-using A011MainPavel002PortN07.ViewModels.Base;
+﻿using Task003AsyncEnd003.Commands;
+using Task003AsyncEnd003.Models;
+using Task003AsyncEnd003.QuikBase;
+using Task003AsyncEnd003.ViewModels.Base;
 using Microsoft.Win32;
 using QuikSharp;
 using QuikSharp.DataStructures;
@@ -9,22 +9,25 @@ using QuikSharp.DataStructures.Transaction;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Threading;
 
-namespace A011MainPavel002PortN07.ViewModels
+namespace Task003AsyncEnd003.ViewModels
 {
     public class MainWindowViewModel : ViewModel
     {
-
         #region Quik
 
+
+
         private Quik _quik;
-        string secCode = "SBER";
+        string secCode = "RIH1";
         string classCode = "";
         string clientCode;
         private Tool tool;
@@ -32,6 +35,7 @@ namespace A011MainPavel002PortN07.ViewModels
 
         ClassAllTrade eventAllTrade = new ClassAllTrade();
         ClassParam eventParam = new ClassParam();
+
         ClassQuote eventQuote = new ClassQuote();
         ClassMoneyLimitEx eventMoney = new ClassMoneyLimitEx();
         ClassDepoLimitEx eventDepo = new ClassDepoLimitEx();
@@ -56,6 +60,7 @@ namespace A011MainPavel002PortN07.ViewModels
 
         #endregion
 
+        #region Свойства
 
         #region _SelectedPageIndex :int - Номер выбранной вкладки
         /// <summary>
@@ -78,7 +83,7 @@ namespace A011MainPavel002PortN07.ViewModels
         /// <summary>
         /// Заголовок окна
         /// </summary>
-        private string _Title = "MoneyMagnet MVVM";
+        private string _Title = "LogerMVVM006Port03";
 
         /// <summary>Заголовок окна</summary>
         public string Title
@@ -108,7 +113,51 @@ namespace A011MainPavel002PortN07.ViewModels
 
         #endregion
 
+        #region Log Логирование
+        private  ObservableCollection<string> logs;
 
+        public ObservableCollection<string> Logs
+        {
+            get => logs;
+            set => Set(ref logs, value);
+        }
+
+
+
+        public void Log(string str)
+        {
+
+            try
+            {
+                //string logString = (DateTime.Now.ToString("yyyy.MM.dd  HH:mm:ss.ffff") + " " + str + Environment.NewLine);
+
+                string l = DateTime.Now.ToString("yyyy.MM.dd  HH:mm:ss.ffff") + "   " + str;
+
+
+                Logs.Add(l);
+
+
+               
+                    
+               
+            
+                   
+             
+
+                
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+           
+        }
+
+        #endregion
+
+
+        #endregion
 
         /************************************************************************************************************/
 
@@ -195,7 +244,11 @@ namespace A011MainPavel002PortN07.ViewModels
         {
             AllQuikConnect();
         }
-
+        //private void TestQuik_L(object sender, LogEventArgs e)
+        //{
+        //    LogString = e.msg;
+        //    VsColl.Add(LogString);
+        //}
 
 
         #endregion
@@ -205,7 +258,10 @@ namespace A011MainPavel002PortN07.ViewModels
         {
             db = new QuikArtemDB();     // инициализация контекста
 
-            collLog = new ObservableCollection<Loger>();
+            logs = new ObservableCollection<string>
+            {
+                "Первая строка"
+            };
 
             SaveFileDialog dialog = new SaveFileDialog();
             var file_name = dialog.FileName;
@@ -215,6 +271,7 @@ namespace A011MainPavel002PortN07.ViewModels
             CloseApplicationCommand2 = new LamdaCommand(OnCloseApplicationCommandExecuted, CanCloseApplicationCommandExecute);
 
             QuikAllConnectCommand = new LamdaCommand(OnQuikAllConnectCommandExecuted, CanQuikAllConnectCommandExecute);
+
             //ChangeTabIndexCommand = new LamdaCommand(OnChangeTabIndexCommandExecuted, CanChangeTabIndexCommandExecute);
 
             //CreateGroupCommand = new LamdaCommand(OnCreateGroupCommandExecuted, CanCreateGroupCommandExecute);
@@ -225,9 +282,11 @@ namespace A011MainPavel002PortN07.ViewModels
 
             #endregion
 
-            /********************************************************************************************************************/
+        /********************************************************************************************************************/
 
         }
+
+        #region QUIK
 
         #region События
 
@@ -396,8 +455,6 @@ namespace A011MainPavel002PortN07.ViewModels
 
                 db.ClassParams.Add(eventParam);
                 db.SaveChanges();
-
-
 
             }
 
@@ -598,14 +655,16 @@ namespace A011MainPavel002PortN07.ViewModels
             Thread.Sleep(sl);
         }
 
-        public async void AllQuikConnect()  //Подключение к Quik
+        public void AllQuikConnect()  //Подключение к Quik
         {
 
             try
             {
                 Log("Подключаемся к терминалу Quik...");
 
-                await Task.Run(() => TestTime());
+                TestTime();
+                
+                //_quik = new Quik(Quik.DefaultPort, new InMemoryStorage());  // Пока закрыт TestTime
 
 
             }
@@ -687,7 +746,7 @@ namespace A011MainPavel002PortN07.ViewModels
 
                 else
                 {
-                    Log("Настало время!!! ");
+                    //Log("Настало время!!! ");
                     _quik = new Quik(Quik.DefaultPort, new InMemoryStorage());
 
 
@@ -696,9 +755,9 @@ namespace A011MainPavel002PortN07.ViewModels
 
 
 
-                Log("Привет мир");
+                //Log("Привет мир");
 
-                Log(timeNow);
+                //Log(timeNow);
 
                 //Log(timeConst);
 
@@ -706,7 +765,8 @@ namespace A011MainPavel002PortN07.ViewModels
 
             } while (timeAllMinutes > nowAllMinutes);
 
-            Log("Победа!!!");
+          
+             Log("Победа!!!");
         }
 
         #endregion
@@ -724,8 +784,6 @@ namespace A011MainPavel002PortN07.ViewModels
             }
             Log("Сняты все заявки!");
         }
-
-
         public void KillStopOrders()
         {
             var stopOrders = _quik.StopOrders.GetStopOrders(classCode, secCode).Result;
@@ -738,7 +796,6 @@ namespace A011MainPavel002PortN07.ViewModels
             }
             Log("Сняты все СТОПзаявки!");
         }
-
         public void KillAllPosetions()
         {
             var allPosetions = _quik.Trading.GetDepoLimits(secCode).Result[1].CurrentBalance / tool.Lot;
@@ -758,37 +815,8 @@ namespace A011MainPavel002PortN07.ViewModels
             Log(allPosetions.ToString());
         }
 
-
-        Loger log = new Loger();
-
-        private ObservableCollection<Loger> collLog ;
-
-        public ObservableCollection<Loger> CollLog
-        {
-            get => collLog;
-            set => Set(ref collLog, value);
-        }
-
-        private void Log(string str)
-        {
-            try
-            {
-                
-
-                log.LogString=(DateTime.Now.ToString("yyyy.MM.dd  HH:mm:ss.ffff") + " " + str + Environment.NewLine);
-
-                collLog.Add(log);
-
-
-                    //TBLog.ScrollToLine(TBLog.LineCount - 1);
-                
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-        }
         #endregion
-       
+
+        #endregion
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace A011MainPavel002PortN07.Views.Windows
+namespace Task003AsyncEnd003.Views.Windows     // Порт 03
 {
     public partial class MainWindow : Window
     {
