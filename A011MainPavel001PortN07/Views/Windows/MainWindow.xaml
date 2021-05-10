@@ -69,11 +69,11 @@
                 <Separator/>
                 <Button Content="Открытый интерес" VerticalAlignment="Top"/>
                 <Separator/>
-                <Button Content="Quik Артем" VerticalAlignment="Top"     />
+                <Button Content="Quik А" VerticalAlignment="Top"     />
                 <Separator/>
-                <Button Content="Quik Настя" VerticalAlignment="Top"    />
+                <Button Content="Quik Н" VerticalAlignment="Top"    />
                 <Separator/>
-                <Button Content="Quik Junior" VerticalAlignment="Top"/>
+                <Button Content="Quik J" VerticalAlignment="Top"/>
                 <Separator/>
                 <Button Content="Логирование" VerticalAlignment="Top"    />
                 <Separator/>
